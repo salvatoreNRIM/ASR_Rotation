@@ -1,0 +1,20 @@
+function ampl_resp = find_integral_tw(time_series, RT, tw)
+%Find the integral of the time_series from the Reaction Time point for a
+%time window (tw)
+
+time_series_of_interest = time_series(RT:RT+tw);
+tot_int = trapz(time_series_of_interest);
+
+%Get rid of elevated rectangular
+rect = tw * time_series(RT);
+ampl_resp = tot_int - rect; % mm 
+
+%Plot integral range on time series
+figure; hold on;
+plot(time_series)
+hold on;
+line([RT, RT], [0, 20], 'Color', 'r', 'LineWidth', 1);
+line([RT+tw, RT+tw], [0, 20], 'Color', 'r', 'LineWidth', 1);
+
+
+
